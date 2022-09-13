@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { ListNotesComponent } from './components/list-notes/list-notes.component';
+
+const routes: Routes = [
+  { path: 'home'     , component: ListNotesComponent },
+  { path: '**'                , redirectTo: 'home' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
