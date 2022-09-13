@@ -2,3 +2,7 @@
 .blueText {
     color: #011f4b;
 }
+
+.shadow-sm .form-floating .text-area-height{
+    min-height: 200px;
+}
