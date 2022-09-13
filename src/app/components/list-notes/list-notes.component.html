@@ -37,7 +37,7 @@
                 <tr *ngFor="let note of notes; let i = index  ">
                     <th scope="row">{{i + 1}}</th>
                     <td>{{ note.title }}</td>
-                    <td>{{ note.date | date }}</td>
+                    <td>{{ note.date | date: 'medium' }}</td>
                     <td>
                         <button type="button" class="btn btn-info" (click)="reedNote( note.key$! )">
                             <i class="fa fa-folder" aria-hidden="true"> Ver </i>
