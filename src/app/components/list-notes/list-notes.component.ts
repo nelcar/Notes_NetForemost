@@ -19,6 +19,8 @@ import Swal from 'sweetalert2';
 export class ListNotesComponent implements OnInit {
 
   notes:Notes[] = []; //Array for Notes
+  notesSearch:Notes[] = []; //Array for especific notes on search 
+  searchInput:string = "";
 
   constructor(private router:Router,
     private notesService:NotesService) {
@@ -27,6 +29,21 @@ export class ListNotesComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+  
+  //search data on array
+  searchNote(){
+    this.notesSearch = [];
+    this.notes.forEach(element => {
+      if(
+        element.title.toLowerCase().includes(this.searchInput.toLowerCase())
+        || element.body.toLowerCase().includes(this.searchInput.toLowerCase())
+        || element.date.toString().toLowerCase().includes(this.searchInput.toLowerCase())
+        || element.updateDate.toString().toLowerCase().includes(this.searchInput.toLowerCase())
+      ){
+        this.notesSearch.push(element);
+      }
+    });
   }
   
   //function for calling reed component
@@ -46,6 +63,7 @@ export class ListNotesComponent implements OnInit {
     this.notesService.getAll().subscribe(data =>{
       Swal.close();
       this.notes = data;
+      this.searchNote();
     }, err => {
       Swal.close();
       console.error(err);
