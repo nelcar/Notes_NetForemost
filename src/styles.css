@@ -15,6 +15,10 @@
     font-weight: bold;
 }
 
+.pointer{
+    cursor:pointer;
+}
+
 .shadow-sm .form-floating .text-area-height{
     min-height: 200px;
 }
