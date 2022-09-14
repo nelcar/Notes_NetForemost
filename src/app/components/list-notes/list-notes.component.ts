@@ -42,8 +42,6 @@ export class ListNotesComponent implements OnInit {
       if(
         element.title.toLowerCase().includes(this.searchInput.toLowerCase())
         || element.body.toLowerCase().includes(this.searchInput.toLowerCase())
-        || element.date.toString().toLowerCase().includes(this.searchInput.toLowerCase())
-        || element.updateDate.toString().toLowerCase().includes(this.searchInput.toLowerCase())
       ){
         this.notesSearch.push(element);
       }
