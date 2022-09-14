@@ -27,9 +27,11 @@ export class AddNoteComponent implements OnInit {
     this.note = new Notes();
   }
 
+  //save data
   onSubmit(form:NgForm){
+
+    //validating data
     if (form.invalid) {
-      //invalid data alert
       Swal.fire({
         allowOutsideClick: false,
         icon: 'error',
@@ -38,6 +40,7 @@ export class AddNoteComponent implements OnInit {
       return;
     }
 
+    //if data is valid
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
@@ -45,10 +48,10 @@ export class AddNoteComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this.note.date = new Date();
+    this.note.date = new Date(); //saving date
 
-    this.notesService.add(this.note,).subscribe(
-      (answer:any) => {
+    //saving data on db
+    this.notesService.add(this.note,).subscribe( (answer:any) => {
 
         Swal.close();
         Swal.fire({
@@ -56,11 +59,10 @@ export class AddNoteComponent implements OnInit {
           icon: 'success',
           text: 'Nota Guardada',
         });
-        //TODO: redireccionamiento a la lista usuarios
+        //calling reed component
         this.router.navigate(['note',answer.name]);
-      },
-      (err) => {
-        
+      }, (err) => {
+        //error saving data on db
         console.error(err);
         Swal.close();
         Swal.fire({

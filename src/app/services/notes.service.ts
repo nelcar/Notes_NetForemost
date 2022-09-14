@@ -36,6 +36,12 @@ export class NotesService {
     }));
   }
 
+  //update notes, 
+  updateElement(key:string, data: Notes){
+    delete data.key$;
+    return this.http.put(`${ this.url }/notes/${ key }.json`,data);
+  }
+
   //Function for prepare data in a array
   private createArray(data:any){
     if(data === null){

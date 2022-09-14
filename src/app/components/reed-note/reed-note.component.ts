@@ -63,7 +63,7 @@ export class ReedNoteComponent implements OnInit {
   }
 
   editNote(){
-    this.router.navigate( ['/edit', this.note.key$] );
+    this.router.navigate( ['edit', this.note.key$] );
   }
 
 }

@@ -3,6 +3,18 @@
     color: #011f4b;
 }
 
+.greenText{
+    color: #024b01;
+}
+
+.purpleText{
+    color: #35014b;
+}
+
+.bold{
+    font-weight: bold;
+}
+
 .shadow-sm .form-floating .text-area-height{
     min-height: 200px;
 }

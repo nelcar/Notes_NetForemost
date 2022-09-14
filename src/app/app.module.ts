@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { ListNotesComponent } from './components/list-notes/list-notes.component';
 import { ReedNoteComponent } from './components/reed-note/reed-note.component';
 import { AddNoteComponent } from './components/add-note/add-note.component';
+import { EditNoteComponent } from './components/edit-note/edit-note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListNotesComponent,
     ReedNoteComponent,
-    AddNoteComponent
+    AddNoteComponent,
+    EditNoteComponent
   ],
   imports: [
     BrowserModule,

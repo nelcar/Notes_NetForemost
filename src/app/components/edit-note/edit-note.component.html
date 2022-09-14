@@ -1,0 +1,59 @@
+<section>
+    <div class="container-fluid m-3 pe-3">
+        <div class="text-center">
+            <h2 class="blueText">Editando Nota</h2>
+            <hr>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid m-3">
+        <form (ngSubmit)="onSubmit( f )"
+                #f="ngForm"
+                class="validate-form">
+
+            <div class="shadow-sm bg-body rounded mb-3">
+                <span *ngIf="f.submitted && f.controls['title'].errors" 
+                    class="text-danger">El título es obligatorio</span>
+    
+                <div class="form-floating">
+                    <input class="form-control"
+                            type="text" 
+                            [(ngModel)] = "note.title"
+                            name="title"
+                            required 
+                            placeholder="Título de la nota"
+                            id="title">
+                    <label for="title">Título</label>
+                </div>
+            </div>
+
+            <div class="shadow-sm bg-body rounded mb-3">
+                <span *ngIf="f.submitted && f.controls['title'].errors" 
+                    class="text-danger">El contenido es obligatorio</span>
+    
+                <div class="form-floating">
+                    <textarea class="form-control text-area-height"
+                            type="text" 
+                            [(ngModel)] = "note.body"
+                            name="body"
+                            required 
+                            placeholder="Contenido"
+                            id="body"></textarea>
+                    <label for="body">Contenido</label>
+                </div>
+            </div>
+
+            <div class="col-sm-12 p-3">
+                <div class="d-grid gap-1">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
