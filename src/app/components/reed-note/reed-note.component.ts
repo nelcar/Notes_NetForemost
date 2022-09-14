@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 //Models
 import { Notes } from '../../models/notes.model';
+
+//Services for db connections
+import { NotesService } from '../../services/notes.service';
+
+//alerts
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reed-note',
@@ -12,21 +18,52 @@ import { Notes } from '../../models/notes.model';
 })
 export class ReedNoteComponent implements OnInit {
 
-  note:Notes;
+  note:Notes = new Notes(); //note var
+  idKey:string = ""; //key for loading note on DB
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+              private notesService:NotesService,
+              private activatedRoute: ActivatedRoute) {
+
+      this.activatedRoute.params.subscribe( params => {
+        this.idKey = params['id'];
+        this.loadData();     
+      });      
+  }
 
   ngOnInit(): void {
-    this.note = {
-      title: 'Hola',
-      body: 'Mundo',
-      date:  new Date(),
-      key$:"1"
-    };
+    this.injections();
+  }
+
+  injections(){
+    this.idKey = "";
+  }
+
+  //function for loading note from db
+  loadData(){
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Espere por favor...'
+    });
+    Swal.showLoading();
+
+    this.notesService.getElement(this.idKey).subscribe(data =>{
+      Swal.close();
+      this.note = <Notes>data;
+    }, err => {
+      Swal.close();
+      console.error(err);
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'error',
+        text: 'Error al cargar nota de Base de Datos',
+      });
+    })
   }
 
   editNote(){
-    this.router.navigate( ['/edit', this.note.key$] );
+    this.router.navigate( ['edit', this.note.key$] );
   }
 
 }

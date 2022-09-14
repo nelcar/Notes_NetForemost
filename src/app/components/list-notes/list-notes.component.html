@@ -23,21 +23,46 @@
 
 
 <section>
+  <div class="container-fluid">
+    <div class="col-sm-12">
+      <input type="text"
+      class="form-control text-center"
+      placeholder="busqueda"
+      (keyup)="searchNote()"
+      name="searchInput"
+      [(ngModel)]="searchInput"
+      />
+    </div>
+  </div>
+</section>
+
+
+<section>
     <div class="table-responsive m-3">
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Nota</th>
-                  <th scope="col">Fecha</th>
+                  <th scope="col">
+                    <i (click)="sortArrayByTitle();sortTitleLH = !sortTitleLH" class="fa fa-sort pointer" aria-hidden="true"></i> 
+                    Nota
+                  </th>
+                  <th scope="col">
+                    <i (click)="sortArrayByDate();sortDateLH = !sortDateLH" class="fa fa-sort pointer" aria-hidden="true"></i>   
+                    Fecha Creación
+                  </th>
+                  <th scope="col">
+                    <i (click)="sortArrayByUpdate();sortUpdateLH = !sortUpdateLH" class="fa fa-sort pointer" aria-hidden="true"></i>   
+                    Fecha Actualización</th>
                   <th scope="col">Acción</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let note of notes; let i = index  ">
+                <tr *ngFor="let note of notesSearch; let i = index  ">
                     <th scope="row">{{i + 1}}</th>
                     <td>{{ note.title }}</td>
-                    <td>{{ note.date | date }}</td>
+                    <td>{{ note.date | date: 'medium' }}</td>
+                    <td>{{ note.updateDate | date: 'medium' }}</td>
                     <td>
                         <button type="button" class="btn btn-info" (click)="reedNote( note.key$! )">
                             <i class="fa fa-folder" aria-hidden="true"> Ver </i>
