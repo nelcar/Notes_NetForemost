@@ -1,18 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-//Components
-import { ListNotesComponent } from './components/list-notes/list-notes.component';
-import { ReedNoteComponent } from './components/reed-note/reed-note.component';
-import { AddNoteComponent } from './components/add-note/add-note.component';
-import { EditNoteComponent } from './components/edit-note/edit-note.component';
+//Pages
+import { HomePageComponent } from './pages/home-page/home-page.component'
+import { Error404PageComponent } from './pages/errors-pages/error404-page/error404-page.component';
 
 const routes: Routes = [
-  { path: 'home'     , component: ListNotesComponent },
-  { path: 'note/:id' , component: ReedNoteComponent },
-  { path: 'new' , component: AddNoteComponent },
-  { path: 'edit/:id' , component: EditNoteComponent },
-  { path: '**'                , redirectTo: 'home' }
+  { path: 'home'     , component: HomePageComponent },
+  { path: ''     , component: HomePageComponent },
+  { path: 'not-found'     , component: Error404PageComponent },
+  { path: 'notes', loadChildren: () => import('./features/modules/notes/notes.module').then(m => m.NotesModule) },
+  { path: '**'                , redirectTo: 'not-found' }
 ];
 
 @NgModule({
